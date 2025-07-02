@@ -213,12 +213,20 @@ button:hover {
 
   .stats {
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
+    padding: 0;
+    margin-top: 20px;
+    align-items: stretch;
   }
 
   .stat-card {
     width: 100%;
     flex: 1 1 auto;
+    box-sizing: border-box;
+    padding: 12px 16px;
+    margin: 0;
+    border-left-width: 4px;
+    font-size: 15px;
   }
 
   .report-logo {
@@ -235,5 +243,11 @@ button:hover {
 
   .revenue-table-container {
     overflow-x: auto;
+  }
+
+  .revenue-table th,
+  .revenue-table td {
+    padding: 10px 12px;
+    font-size: 13px;
   }
 }
