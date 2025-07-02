@@ -3,6 +3,41 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 import { ResponsiveContainer } from 'recharts';
 import html2pdf from 'html2pdf.js';
+import { db } from './firebase';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
+
+const handleSaveToCloud = async () => {
+  try {
+    const stored = JSON.parse(localStorage.getItem("revenue")) || {};
+    await setDoc(doc(db, "revenueTracker", "user1"), {
+      revenue: stored
+    });
+    alert("Data saved to cloud!");
+  } catch (error) {
+    console.error("Error saving to cloud:", error);
+    alert("Failed to save to cloud.");
+  }
+};
+
+const handleLoadFromCloud = async () => {
+  try {
+    const docRef = doc(db, "revenueTracker", "user1");
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const data = docSnap.data().revenue;
+      localStorage.setItem("revenue", JSON.stringify(data));
+      updateRevenueData(data);
+      alert("Data loaded from cloud!");
+    } else {
+      alert("No cloud data found.");
+    }
+  } catch (error) {
+    console.error("Error loading from cloud:", error);
+    alert("Failed to load from cloud.");
+  }
+};
+
 
 const CustomDot = ({ cx, cy, payload, highestDay, lowestDay }) => {
   const isHighest = highestDay && payload.date === highestDay.date;
@@ -215,6 +250,18 @@ return (
     📄 Download Full Report as PDF
   </button>
 </div>
+<div className="center-button">
+  <button className="no-print" onClick={handleSaveToCloud}>
+    ☁️ Save to Cloud
+  </button>
+</div>
+
+<div className="center-button">
+  <button className="no-print" onClick={handleLoadFromCloud}>
+    ☁️ Load from Cloud
+  </button>
+</div>
+
   </div>
 );
 };
