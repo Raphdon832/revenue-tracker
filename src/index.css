@@ -175,3 +175,7 @@ button:hover {
 .revenue-table tbody tr:nth-child(even) {
   background-color: #fafafa;
 }
+
+.center-button button {
+  margin: 5px;
+}
