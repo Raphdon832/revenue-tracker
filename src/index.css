@@ -184,17 +184,31 @@ button:hover {
 @media (max-width: 600px) {
   .card {
     padding: 20px;
+    box-sizing: border-box;
   }
 
   .input-group {
     flex-direction: column;
     align-items: stretch;
+    gap: 10px;
   }
 
   .input-group input,
   .input-group button {
     width: 100%;
-    max-width: 100%;
+    box-sizing: border-box;
+    padding: 14px 16px;
+    font-size: 16px;
+  }
+
+  .center-button {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .center-button button {
+    width: 100%;
+    margin: 8px 0;
   }
 
   .stats {
@@ -203,21 +217,8 @@ button:hover {
   }
 
   .stat-card {
+    width: 100%;
     flex: 1 1 auto;
-    width: 100%;
-  }
-
-  .revenue-table-container {
-    overflow-x: auto;
-  }
-
-  .center-button {
-    flex-direction: column;
-  }
-
-  .center-button button {
-    width: 100%;
-    margin: 5px 0;
   }
 
   .report-logo {
@@ -231,5 +232,8 @@ button:hover {
   .report-title p {
     font-size: 13px;
   }
-}
 
+  .revenue-table-container {
+    overflow-x: auto;
+  }
+}
